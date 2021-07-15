@@ -139,9 +139,10 @@ export const PancakeInput = styled.input<InputProps>`
     transform: translateX(${getScale("travelDistance")});
   }
 
+  /* box-shadow: 0 ${getScale("pancakeThickness")} 0 ${getScale("pancakeThickness")} #fbbe7c; */
   &:checked + label .pancake:nth-child(1) {
     background: #e27c31;
-    box-shadow: 0 ${getScale("pancakeThickness")} 0 ${getScale("pancakeThickness")} #fbbe7c;
+    box-shadow: none;
     transition-delay: 0.2s;
   }
 
