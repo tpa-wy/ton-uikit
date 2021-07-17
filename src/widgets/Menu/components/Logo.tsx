@@ -3,7 +3,11 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { LogoIcon } from "../../../components/Svg";
 import Flex from "../../../components/Box/Flex";
-import { HamburgerIcon, HamburgerCloseIcon, LogoIcon as LogoWithText } from "../icons";
+import {
+   HamburgerIcon, 
+   HamburgerCloseIcon, 
+  LogoIcon as LogoWithText
+} from "../icons";
 import MenuButton from "./MenuButton";
 
 interface Props {
@@ -21,6 +25,9 @@ const blink = keyframes`
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
+  color: #3C3C3C;
+  font-weight: 500;
+  font-size: 20px;
   .mobile-icon {
     width: 32px;
     ${({ theme }) => theme.mediaQueries.nav} {
@@ -48,17 +55,22 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const FlexStyle = styled(Flex)`
+/* margin-left: 30px; */
+`
+
 const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
   const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
       <LogoIcon className="mobile-icon" />
       <LogoWithText className="desktop-icon" isDark={isDark} />
+      Ton Swap
     </>
   );
 
   return (
-    <Flex>
+    <FlexStyle>
       <MenuButton aria-label="Toggle menu" onClick={togglePush} mr="24px">
         {isPushed ? (
           <HamburgerCloseIcon width="24px" color="textSubtle" />
@@ -75,7 +87,7 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
           {innerLogo}
         </StyledLink>
       )}
-    </Flex>
+    </FlexStyle>
   );
 };
 

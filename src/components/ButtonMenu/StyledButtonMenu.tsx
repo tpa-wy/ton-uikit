@@ -7,7 +7,8 @@ type StyledButtonMenuProps = {
 };
 
 const getBackgroundColor = ({ theme, variant }: StyledButtonMenuProps) => {
-  return theme.colors[variant === variants.SUBTLE ? "input" : "tertiary"];
+  return variant === variants.SUBTLE ? "#ffffff" : theme.colors["tertiary"];
+  // return theme.colors[variant === variants.SUBTLE ? "input" : "tertiary"];
 };
 
 const StyledButtonMenu = styled.div<{ variant: Variant }>`

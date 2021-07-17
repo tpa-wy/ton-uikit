@@ -16,7 +16,9 @@ interface StyledSvgProps extends SvgProps {
   isDark?: boolean;
 }
 
-const Icons = (IconModule as unknown) as { [key: string]: React.FC<StyledSvgProps> };
+const Icons = IconModule as unknown as {
+  [key: string]: React.FC<StyledSvgProps>;
+};
 
 const Container = styled.div`
   display: flex;
@@ -24,9 +26,25 @@ const Container = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
+  padding-top: 180px;
 `;
 
-const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, isDark }) => {
+const MenuEntryStyle = styled(MenuEntry)`
+  height: 30px;
+`;
+
+const MenuEntryStyle2 = styled(MenuEntry)`
+  margin: 0 45px;
+  padding-bottom: 10px;
+`;
+
+const PanelBody: React.FC<Props> = ({
+  isPushed,
+  pushNav,
+  isMobile,
+  links,
+  isDark,
+}) => {
   const location = useLocation();
 
   // Close the menu when a user clicks a link on mobile
@@ -37,11 +55,18 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, isDark
       {links.map((entry) => {
         const Icon = Icons[entry.icon];
         const iconElement = <Icon isDark={isDark} width="24px" mr="8px" />;
-        const calloutClass = entry.calloutClass ? entry.calloutClass : undefined;
+        const calloutClass = entry.calloutClass
+          ? entry.calloutClass
+          : undefined;
 
         if (entry.items) {
-          const itemsMatchIndex = entry.items.findIndex((item) => item.href === location.pathname);
-          const initialOpenState = entry.initialOpenState === true ? entry.initialOpenState : itemsMatchIndex >= 0;
+          const itemsMatchIndex = entry.items.findIndex(
+            (item) => item.href === location.pathname
+          );
+          const initialOpenState =
+            entry.initialOpenState === true
+              ? entry.initialOpenState
+              : itemsMatchIndex >= 0;
 
           return (
             <Accordion
@@ -52,11 +77,18 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, isDark
               label={entry.label}
               initialOpenState={initialOpenState}
               className={calloutClass}
-              isActive={entry.items.some((item) => item.href === location.pathname)}
+              isActive={entry.items.some(
+                (item) => item.href === location.pathname
+              )}
             >
               {isPushed &&
                 entry.items.map((item) => (
-                  <MenuEntry key={item.href} secondary isActive={item.href === location.pathname} onClick={handleClick}>
+                  <MenuEntryStyle
+                    key={item.href}
+                    secondary
+                    isActive={item.href === location.pathname}
+                    onClick={handleClick}
+                  >
                     <MenuLink href={item.href}>
                       <LinkLabel isPushed={isPushed}>{item.label}</LinkLabel>
                       {item.status && (
@@ -65,15 +97,19 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, isDark
                         </LinkStatus>
                       )}
                     </MenuLink>
-                  </MenuEntry>
+                  </MenuEntryStyle>
                 ))}
             </Accordion>
           );
         }
         return (
-          <MenuEntry key={entry.label} isActive={entry.href === location.pathname} className={calloutClass}>
+          <MenuEntryStyle2
+            key={entry.label}
+            isActive={entry.href === location.pathname}
+            className={calloutClass}
+          >
             <MenuLink href={entry.href} onClick={handleClick}>
-              {iconElement}
+              {/* {iconElement} */}
               <LinkLabel isPushed={isPushed}>{entry.label}</LinkLabel>
               {entry.status && (
                 <LinkStatus color={entry.status.color} fontSize="14px">
@@ -81,7 +117,7 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, isDark
                 </LinkStatus>
               )}
             </MenuLink>
-          </MenuEntry>
+          </MenuEntryStyle2>
         );
       })}
     </Container>

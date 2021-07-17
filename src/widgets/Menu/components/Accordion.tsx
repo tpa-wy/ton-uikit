@@ -19,6 +19,10 @@ const Container = styled.div`
   flex-direction: column;
   // Safari fix
   flex-shrink: 0;
+    margin: 0 45px;
+    padding-bottom: 10px;
+    border-top: 1px solid #6F6F6F;
+    border-bottom: 1px solid #6F6F6F;
 `;
 
 const AccordionContent = styled.div<{ isOpen: boolean; isPushed: boolean; maxHeight: number }>`
@@ -27,7 +31,7 @@ const AccordionContent = styled.div<{ isOpen: boolean; isPushed: boolean; maxHei
   overflow: hidden;
   border-color: ${({ isOpen, isPushed }) => (isOpen && isPushed ? "rgba(133, 133, 133, 0.1)" : "transparent")};
   border-style: solid;
-  border-width: 1px 0;
+  /* border-width: 1px 0; */
 `;
 
 const Accordion: React.FC<Props> = ({
@@ -54,7 +58,7 @@ const Accordion: React.FC<Props> = ({
   return (
     <Container>
       <MenuEntry onClick={handleClick} className={className} isActive={isActive}>
-        {icon}
+        {/* {icon} */}
         <LinkLabel isPushed={isPushed}>{label}</LinkLabel>
         {isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
       </MenuEntry>

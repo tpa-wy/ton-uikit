@@ -5,10 +5,16 @@ import { useWalletModal } from "../../WalletModal";
 import { Login } from "../../WalletModal/types";
 
 const MyButton = styled(Button)`
-  background-color: #2f303f !important;
   color: #ffffff !important;
+  background: #ED3974 !important;
+  border-radius: 5px;
 `;
 
+const MyButton1 = styled(Button)`
+  color: #ED3974 !important;
+  background: #FFFFFF !important;
+  border-radius: 5px;
+`
 interface Props {
   account?: string;
   connectTitle?: string;
@@ -23,7 +29,7 @@ const UserBlock: React.FC<Props> = ({ account, connectTitle, learnConnect, login
   return (
     <div>
       {account ? (
-        <MyButton
+        <MyButton1
           scale="sm"
           variant="tertiary"
           onClick={() => {
@@ -31,7 +37,7 @@ const UserBlock: React.FC<Props> = ({ account, connectTitle, learnConnect, login
           }}
         >
           {accountEllipsis}
-        </MyButton>
+        </MyButton1>
       ) : (
         <MyButton
           scale="sm"
@@ -39,7 +45,7 @@ const UserBlock: React.FC<Props> = ({ account, connectTitle, learnConnect, login
             onPresentConnectModal();
           }}
         >
-          Connect
+          Connect Wallet
         </MyButton>
       )}
     </div>
