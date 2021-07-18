@@ -59,7 +59,11 @@ const AccountModal: React.FC<Props> = ({ submit }) => {
   return (
     <Referee>
       Referees:
-      <TheInput value={value} onChange={(e) => SetValue(e.target.value)} />
+      <TheInput
+        value={value}
+        placeholder="Address"
+        onChange={(e) => SetValue(e.target.value)}
+      />
       <Btn onClick={() => submit(value)}>Submit</Btn>
     </Referee>
   );
