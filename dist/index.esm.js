@@ -3897,7 +3897,7 @@ var AccountModal$2 = function (_a) {
     var _b = useState(""), value = _b[0], SetValue = _b[1];
     return (React.createElement(Referee, null,
         "Referees:",
-        React.createElement(TheInput, { value: value, onChange: function (e) { return SetValue(e.target.value); } }),
+        React.createElement(TheInput, { value: value, placeholder: "Address", onChange: function (e) { return SetValue(e.target.value); } }),
         React.createElement(Btn, { onClick: function () { return submit(value); } }, "Submit")));
 };
 var templateObject_1$5, templateObject_2$2, templateObject_3$1;
