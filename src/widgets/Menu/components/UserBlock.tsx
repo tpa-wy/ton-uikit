@@ -6,26 +6,43 @@ import { Login } from "../../WalletModal/types";
 
 const MyButton = styled(Button)`
   color: #ffffff !important;
-  background: #ED3974 !important;
+  background: #ed3974 !important;
   border-radius: 5px;
 `;
 
 const MyButton1 = styled(Button)`
-  color: #ED3974 !important;
-  background: #FFFFFF !important;
+  color: #ed3974 !important;
+  background: #ffffff !important;
   border-radius: 5px;
-`
+`;
 interface Props {
   account?: string;
   connectTitle?: string;
   learnConnect?: string;
   login: Login;
   logout: () => void;
+  submit: (value: string) => void;
 }
 
-const UserBlock: React.FC<Props> = ({ account, connectTitle, learnConnect, login, logout }) => {
-  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(login, logout, connectTitle, learnConnect, account);
-  const accountEllipsis = account ? `${account.substring(0, 4)}...${account.substring(account.length - 4)}` : null;
+const UserBlock: React.FC<Props> = ({
+  account,
+  connectTitle,
+  learnConnect,
+  login,
+  logout,
+  submit,
+}) => {
+  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(
+    login,
+    logout,
+    submit,
+    connectTitle,
+    learnConnect,
+    account
+  );
+  const accountEllipsis = account
+    ? `${account.substring(0, 4)}...${account.substring(account.length - 4)}`
+    : null;
   return (
     <div>
       {account ? (
@@ -52,5 +69,5 @@ const UserBlock: React.FC<Props> = ({ account, connectTitle, learnConnect, login
   );
 };
 
-export default UserBlock
+export default UserBlock;
 // export default React.memo(UserBlock, (prevProps, nextProps) => prevProps.account === nextProps.account);

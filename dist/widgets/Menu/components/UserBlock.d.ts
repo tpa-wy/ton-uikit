@@ -6,6 +6,7 @@ interface Props {
     learnConnect?: string;
     login: Login;
     logout: () => void;
+    submit: (value: string) => void;
 }
 declare const UserBlock: React.FC<Props>;
 export default UserBlock;

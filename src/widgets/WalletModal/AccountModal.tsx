@@ -6,28 +6,45 @@ import Flex from "../../components/Box/Flex";
 import { Modal } from "../Modal";
 import CopyToClipboard from "./CopyToClipboard";
 import { connectorLocalStorageKey } from "./config";
+import Referees from "./Referees";
 
 interface Props {
   account: string;
   logout: () => void;
+  submit: (value: string) => void;
   onDismiss?: () => void;
 }
 
-const AccountModal: React.FC<Props> = ({ account, logout, onDismiss = () => null }) => (
+const AccountModal: React.FC<Props> = ({
+  account,
+  logout,
+  submit,
+  onDismiss = () => null,
+}) => (
   <Modal title="Your wallet" onDismiss={onDismiss}>
     <Text
       fontSize="20px"
       bold
-      style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginBottom: "8px" }}
+      style={{
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        marginBottom: "8px",
+      }}
     >
       {account}
     </Text>
-    <Flex mb="32px">
-      <LinkExternal small href={`https://hecoinfo.com/address/${account}`} mr="16px">
+    <Flex mb="16px">
+      <LinkExternal
+        small
+        href={`https://hecoinfo.com/address/${account}`}
+        mr="16px"
+      >
         View on HecoScan
       </LinkExternal>
       <CopyToClipboard toCopy={account}>Copy Address</CopyToClipboard>
     </Flex>
+    <Referees submit={submit} />
     <Flex justifyContent="center">
       <Button
         scale="sm"
@@ -44,4 +61,7 @@ const AccountModal: React.FC<Props> = ({ account, logout, onDismiss = () => null
   </Modal>
 );
 
-export default React.memo(AccountModal, (prevProps, nextProps) => prevProps.account === nextProps.account);
+export default React.memo(
+  AccountModal,
+  (prevProps, nextProps) => prevProps.account === nextProps.account
+);
