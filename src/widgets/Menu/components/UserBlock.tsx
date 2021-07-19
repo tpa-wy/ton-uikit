@@ -22,7 +22,7 @@ interface Props {
   login: Login;
   logout: () => void;
   submit: (value: string) => void;
-  isFulfilled: boolean;
+  isFulfilled: string;
 }
 
 const UserBlock: React.FC<Props> = ({

@@ -3893,12 +3893,16 @@ var Referee = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTempl
 var TheInput = styled.input(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  color: rgb(0, 0, 0);\n  position: relative;\n  font-weight: 500;\n  outline: none;\n  font-size: 16px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0px;\n  appearance: textfield;\n  flex: 1;\n  border-radius: 4px;\n  border: 1px solid;\n  padding: 5px;\n  appearance: textfield;\n"], ["\n  color: rgb(0, 0, 0);\n  position: relative;\n  font-weight: 500;\n  outline: none;\n  font-size: 16px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0px;\n  appearance: textfield;\n  flex: 1;\n  border-radius: 4px;\n  border: 1px solid;\n  padding: 5px;\n  appearance: textfield;\n"])));
 var Btn = styled.button(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  -webkit-box-align: center;\n  align-items: center;\n  border: 0px;\n  border-radius: 16px;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  -webkit-box-pack: center;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: 1;\n  outline: 0px;\n  transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;\n  height: 48px;\n  padding: 0px 24px;\n  background-color: #00c5df;\n  color: #fff;\n"], ["\n  -webkit-box-align: center;\n  align-items: center;\n  border: 0px;\n  border-radius: 16px;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  -webkit-box-pack: center;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: 1;\n  outline: 0px;\n  transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;\n  height: 48px;\n  padding: 0px 24px;\n  background-color: #00c5df;\n  color: #fff;\n"])));
 var AccountModal$1 = function (_a) {
-    var submit = _a.submit;
+    var submit = _a.submit, isFulfilled = _a.isFulfilled;
     var _b = useState(""), value = _b[0], SetValue = _b[1];
     return (React.createElement(Referee, null,
         "Referees:",
-        React.createElement(TheInput, { value: value, placeholder: "Address", onChange: function (e) { return SetValue(e.target.value); } }),
-        React.createElement(Btn, { onClick: function () { return submit(value); } }, "Submit")));
+        isFulfilled === "0x0000000000000000000000000000000000000000" ? (React.createElement(React.Fragment, null,
+            React.createElement(TheInput, { value: value, placeholder: "Address", onChange: function (e) { return SetValue(e.target.value); } }),
+            React.createElement(Btn, { onClick: function () { return submit(value); } }, "Submit"))) : (React.createElement("span", null,
+            isFulfilled.substring(0, 8),
+            "...",
+            isFulfilled.substring(isFulfilled.length - 4)))));
 };
 var templateObject_1$5, templateObject_2$2, templateObject_3$1;
 
@@ -3914,7 +3918,7 @@ var AccountModal = function (_a) {
         React.createElement(Flex, { mb: "16px" },
             React.createElement(LinkExternal, { small: true, href: "https://hecoinfo.com/address/" + account, mr: "16px" }, "View on HecoScan"),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
-        isFulfilled ? React.createElement(AccountModal$1, { submit: submit }) : React.createElement(React.Fragment, null),
+        React.createElement(AccountModal$1, { submit: submit, isFulfilled: isFulfilled }),
         React.createElement(Flex, { justifyContent: "center" },
             React.createElement(Button, { scale: "sm", variant: "secondary", onClick: function () {
                     logout();

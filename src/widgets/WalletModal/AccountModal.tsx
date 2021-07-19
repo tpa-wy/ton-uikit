@@ -12,7 +12,7 @@ interface Props {
   account: string;
   logout: () => void;
   submit: (value: string) => void;
-  isFulfilled: boolean;
+  isFulfilled: string;
   onDismiss?: () => void;
 }
 
@@ -46,7 +46,7 @@ const AccountModal: React.FC<Props> = ({
       </LinkExternal>
       <CopyToClipboard toCopy={account}>Copy Address</CopyToClipboard>
     </Flex>
-    {isFulfilled ? <Referees submit={submit} /> : <></>}
+    <Referees submit={submit} isFulfilled={isFulfilled} />
     <Flex justifyContent="center">
       <Button
         scale="sm"

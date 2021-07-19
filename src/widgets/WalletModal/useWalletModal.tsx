@@ -13,7 +13,7 @@ const useWalletModal = (
   login: Login,
   logout: () => void,
   submit: (value: string) => void,
-  isFulfilled: boolean,
+  isFulfilled: string,
   connectTitle?: string,
   learnConnect?: string,
   account?: string

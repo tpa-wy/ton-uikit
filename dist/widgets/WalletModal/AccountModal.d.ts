@@ -3,7 +3,7 @@ interface Props {
     account: string;
     logout: () => void;
     submit: (value: string) => void;
-    isFulfilled: boolean;
+    isFulfilled: string;
     onDismiss?: () => void;
 }
 declare const AccountModal: React.FC<Props>;

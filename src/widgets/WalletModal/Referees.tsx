@@ -51,20 +51,30 @@ const Btn = styled.button`
 
 interface Props {
   submit: (value: string) => void;
+  isFulfilled: string;
 }
 
-const AccountModal: React.FC<Props> = ({ submit }) => {
+const AccountModal: React.FC<Props> = ({ submit, isFulfilled }) => {
   const [value, SetValue] = useState("");
 
   return (
     <Referee>
       Referees:
-      <TheInput
-        value={value}
-        placeholder="Address"
-        onChange={(e) => SetValue(e.target.value)}
-      />
-      <Btn onClick={() => submit(value)}>Submit</Btn>
+      {isFulfilled === "0x0000000000000000000000000000000000000000" ? (
+        <>
+          <TheInput
+            value={value}
+            placeholder="Address"
+            onChange={(e) => SetValue(e.target.value)}
+          />
+          <Btn onClick={() => submit(value)}>Submit</Btn>
+        </>
+      ) : (
+        <span>
+          {isFulfilled.substring(0, 8)}...
+          {isFulfilled.substring(isFulfilled.length - 4)}
+        </span>
+      )}
     </Referee>
   );
 };
