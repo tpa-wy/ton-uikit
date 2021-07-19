@@ -55,4 +55,5 @@ export interface NavProps extends PanelProps {
     profile?: Profile;
     logout: () => void;
     submit: (value: string) => void;
+    isFulfilled: boolean;
 }

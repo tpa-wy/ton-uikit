@@ -13,6 +13,7 @@ const useWalletModal = (
   login: Login,
   logout: () => void,
   submit: (value: string) => void,
+  isFulfilled: boolean,
   connectTitle?: string,
   learnConnect?: string,
   account?: string
@@ -25,7 +26,12 @@ const useWalletModal = (
     />
   );
   const [onPresentAccountModal] = useModal(
-    <AccountModal account={account || ""} logout={logout} submit={submit} />
+    <AccountModal
+      account={account || ""}
+      logout={logout}
+      submit={submit}
+      isFulfilled={isFulfilled}
+    />
   );
   return { onPresentConnectModal, onPresentAccountModal };
 };

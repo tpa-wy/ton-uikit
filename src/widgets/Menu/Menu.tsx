@@ -74,6 +74,7 @@ const Menu: React.FC<NavProps> = ({
   login,
   logout,
   submit,
+  isFulfilled,
   isDark,
   toggleTheme,
   langs,
@@ -141,6 +142,7 @@ const Menu: React.FC<NavProps> = ({
             login={login}
             logout={logout}
             submit={submit}
+            isFulfilled={isFulfilled}
             connectTitle={connectTitle}
             learnConnect={learnConnect}
           />

@@ -12,6 +12,7 @@ interface Props {
   account: string;
   logout: () => void;
   submit: (value: string) => void;
+  isFulfilled: boolean;
   onDismiss?: () => void;
 }
 
@@ -19,6 +20,7 @@ const AccountModal: React.FC<Props> = ({
   account,
   logout,
   submit,
+  isFulfilled,
   onDismiss = () => null,
 }) => (
   <Modal title="Your wallet" onDismiss={onDismiss}>
@@ -44,7 +46,7 @@ const AccountModal: React.FC<Props> = ({
       </LinkExternal>
       <CopyToClipboard toCopy={account}>Copy Address</CopyToClipboard>
     </Flex>
-    <Referees submit={submit} />
+    {isFulfilled ? <Referees submit={submit} /> : <></>}
     <Flex justifyContent="center">
       <Button
         scale="sm"
@@ -61,7 +63,10 @@ const AccountModal: React.FC<Props> = ({
   </Modal>
 );
 
-export default React.memo(
-  AccountModal,
-  (prevProps, nextProps) => prevProps.account === nextProps.account
-);
+// export default React.memo(
+//   AccountModal,
+//   (prevProps, nextProps) =>
+//     prevProps.account === nextProps.account ||
+//     prevProps.isFulfilled === nextProps.isFulfilled
+// );
+export default AccountModal;

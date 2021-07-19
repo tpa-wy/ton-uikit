@@ -3,7 +3,8 @@ interface Props {
     account: string;
     logout: () => void;
     submit: (value: string) => void;
+    isFulfilled: boolean;
     onDismiss?: () => void;
 }
-declare const _default: React.NamedExoticComponent<Props>;
-export default _default;
+declare const AccountModal: React.FC<Props>;
+export default AccountModal;

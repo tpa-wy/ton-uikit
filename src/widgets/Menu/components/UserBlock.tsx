@@ -22,6 +22,7 @@ interface Props {
   login: Login;
   logout: () => void;
   submit: (value: string) => void;
+  isFulfilled: boolean;
 }
 
 const UserBlock: React.FC<Props> = ({
@@ -31,11 +32,13 @@ const UserBlock: React.FC<Props> = ({
   login,
   logout,
   submit,
+  isFulfilled,
 }) => {
   const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(
     login,
     logout,
     submit,
+    isFulfilled,
     connectTitle,
     learnConnect,
     account

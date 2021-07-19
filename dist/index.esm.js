@@ -3892,7 +3892,7 @@ var templateObject_1$6, templateObject_2$3;
 var Referee = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  margin-bottom: 16px;\n"], ["\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  margin-bottom: 16px;\n"])));
 var TheInput = styled.input(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  color: rgb(0, 0, 0);\n  position: relative;\n  font-weight: 500;\n  outline: none;\n  font-size: 16px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0px;\n  appearance: textfield;\n  flex: 1;\n  border-radius: 4px;\n  border: 1px solid;\n  padding: 5px;\n  appearance: textfield;\n"], ["\n  color: rgb(0, 0, 0);\n  position: relative;\n  font-weight: 500;\n  outline: none;\n  font-size: 16px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0px;\n  appearance: textfield;\n  flex: 1;\n  border-radius: 4px;\n  border: 1px solid;\n  padding: 5px;\n  appearance: textfield;\n"])));
 var Btn = styled.button(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  -webkit-box-align: center;\n  align-items: center;\n  border: 0px;\n  border-radius: 16px;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  -webkit-box-pack: center;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: 1;\n  outline: 0px;\n  transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;\n  height: 48px;\n  padding: 0px 24px;\n  background-color: #00c5df;\n  color: #fff;\n"], ["\n  -webkit-box-align: center;\n  align-items: center;\n  border: 0px;\n  border-radius: 16px;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  -webkit-box-pack: center;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: 1;\n  outline: 0px;\n  transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;\n  height: 48px;\n  padding: 0px 24px;\n  background-color: #00c5df;\n  color: #fff;\n"])));
-var AccountModal$2 = function (_a) {
+var AccountModal$1 = function (_a) {
     var submit = _a.submit;
     var _b = useState(""), value = _b[0], SetValue = _b[1];
     return (React.createElement(Referee, null,
@@ -3903,7 +3903,7 @@ var AccountModal$2 = function (_a) {
 var templateObject_1$5, templateObject_2$2, templateObject_3$1;
 
 var AccountModal = function (_a) {
-    var account = _a.account, logout = _a.logout, submit = _a.submit, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b;
+    var account = _a.account, logout = _a.logout, submit = _a.submit, isFulfilled = _a.isFulfilled, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b;
     return (React.createElement(Modal, { title: "Your wallet", onDismiss: onDismiss },
         React.createElement(Text, { fontSize: "20px", bold: true, style: {
                 whiteSpace: "nowrap",
@@ -3914,7 +3914,7 @@ var AccountModal = function (_a) {
         React.createElement(Flex, { mb: "16px" },
             React.createElement(LinkExternal, { small: true, href: "https://hecoinfo.com/address/" + account, mr: "16px" }, "View on HecoScan"),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
-        React.createElement(AccountModal$2, { submit: submit }),
+        isFulfilled ? React.createElement(AccountModal$1, { submit: submit }) : React.createElement(React.Fragment, null),
         React.createElement(Flex, { justifyContent: "center" },
             React.createElement(Button, { scale: "sm", variant: "secondary", onClick: function () {
                     logout();
@@ -3922,19 +3922,18 @@ var AccountModal = function (_a) {
                     onDismiss();
                 } }, "Logout"))));
 };
-var AccountModal$1 = React.memo(AccountModal, function (prevProps, nextProps) { return prevProps.account === nextProps.account; });
 
-var useWalletModal = function (login, logout, submit, connectTitle, learnConnect, account) {
+var useWalletModal = function (login, logout, submit, isFulfilled, connectTitle, learnConnect, account) {
     var onPresentConnectModal = useModal(React.createElement(ConnectModal$1, { login: login, connectTitle: connectTitle || "", learnConnect: learnConnect || "" }))[0];
-    var onPresentAccountModal = useModal(React.createElement(AccountModal$1, { account: account || "", logout: logout, submit: submit }))[0];
+    var onPresentAccountModal = useModal(React.createElement(AccountModal, { account: account || "", logout: logout, submit: submit, isFulfilled: isFulfilled }))[0];
     return { onPresentConnectModal: onPresentConnectModal, onPresentAccountModal: onPresentAccountModal };
 };
 
 var MyButton = styled(Button)(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  color: #ffffff !important;\n  background: #ed3974 !important;\n  border-radius: 5px;\n"], ["\n  color: #ffffff !important;\n  background: #ed3974 !important;\n  border-radius: 5px;\n"])));
 var MyButton1 = styled(Button)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  color: #ed3974 !important;\n  background: #ffffff !important;\n  border-radius: 5px;\n"], ["\n  color: #ed3974 !important;\n  background: #ffffff !important;\n  border-radius: 5px;\n"])));
 var UserBlock = function (_a) {
-    var account = _a.account, connectTitle = _a.connectTitle, learnConnect = _a.learnConnect, login = _a.login, logout = _a.logout, submit = _a.submit;
-    var _b = useWalletModal(login, logout, submit, connectTitle, learnConnect, account), onPresentConnectModal = _b.onPresentConnectModal, onPresentAccountModal = _b.onPresentAccountModal;
+    var account = _a.account, connectTitle = _a.connectTitle, learnConnect = _a.learnConnect, login = _a.login, logout = _a.logout, submit = _a.submit, isFulfilled = _a.isFulfilled;
+    var _b = useWalletModal(login, logout, submit, isFulfilled, connectTitle, learnConnect, account), onPresentConnectModal = _b.onPresentConnectModal, onPresentAccountModal = _b.onPresentAccountModal;
     var accountEllipsis = account
         ? account.substring(0, 4) + "..." + account.substring(account.length - 4)
         : null;
@@ -3977,7 +3976,7 @@ var MobileOnlyOverlay = styled(Overlay)(templateObject_5 || (templateObject_5 = 
 });
 var Menu = function (_a) {
     var _b;
-    var account = _a.account, login = _a.login, logout = _a.logout, submit = _a.submit, isDark = _a.isDark, toggleTheme = _a.toggleTheme, langs = _a.langs, setLang = _a.setLang, currentLang = _a.currentLang, cakePriceUsd = _a.cakePriceUsd, links = _a.links; _a.profile; var connectTitle = _a.connectTitle, learnConnect = _a.learnConnect, children = _a.children;
+    var account = _a.account, login = _a.login, logout = _a.logout, submit = _a.submit, isFulfilled = _a.isFulfilled, isDark = _a.isDark, toggleTheme = _a.toggleTheme, langs = _a.langs, setLang = _a.setLang, currentLang = _a.currentLang, cakePriceUsd = _a.cakePriceUsd, links = _a.links; _a.profile; var connectTitle = _a.connectTitle, learnConnect = _a.learnConnect, children = _a.children;
     var isXl = useMatchBreakpoints().isXl;
     var isMobile = isXl === false;
     var _c = useState(!isMobile), isPushed = _c[0], setIsPushed = _c[1];
@@ -4018,7 +4017,7 @@ var Menu = function (_a) {
         React.createElement(StyledNav, { showMenu: showMenu },
             React.createElement(Logo$1, { isPushed: isPushed, togglePush: function () { return setIsPushed(function (prevState) { return !prevState; }); }, isDark: isDark, href: (_b = homeLink === null || homeLink === void 0 ? void 0 : homeLink.href) !== null && _b !== void 0 ? _b : "/" }),
             React.createElement(Flex, null,
-                React.createElement(UserBlock, { account: account, login: login, logout: logout, submit: submit, connectTitle: connectTitle, learnConnect: learnConnect }))),
+                React.createElement(UserBlock, { account: account, login: login, logout: logout, submit: submit, isFulfilled: isFulfilled, connectTitle: connectTitle, learnConnect: learnConnect }))),
         React.createElement(BodyWrapper, null,
             React.createElement(Panel, { isPushed: isPushed, isMobile: isMobile, showMenu: showMenu, isDark: isDark, toggleTheme: toggleTheme, langs: langs, setLang: setLang, currentLang: currentLang, cakePriceUsd: cakePriceUsd, pushNav: setIsPushed, links: links }),
             React.createElement(Inner, { isPushed: isPushed, showMenu: showMenu }, children),
